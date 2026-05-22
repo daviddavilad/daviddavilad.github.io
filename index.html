@@ -3,137 +3,1072 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Dávila</title>
+  <title>David Dávila — Quantitative Finance & Applied Mathematics</title>
+  <meta name="description" content="David Dávila — Finance and Applied Mathematics at the University of New Mexico. Quantitative research, systematic investing, derivatives pricing, and notes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ink: #1a1814;
+      --paper: #fbf9f4;
+      --paper-warm: #f5f1e8;
+      --rule: #d8d2c4;
+      --muted: #6b6557;
+      --accent: #7a1f1f;
+      --accent-soft: #a64545;
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      background: #ffffff;
-      color: #111111;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 19px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    .container {
-      max-width:  980px;
-      margin: 80px auto;
-      padding: 0 24px;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(122, 31, 31, 0.018) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(26, 24, 20, 0.02) 0%, transparent 50%);
     }
 
-    h1 {
-      font-size: 2.4rem;
-      font-weight: normal;
-      margin-bottom: 0.2rem;
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px;
     }
 
-    .subtitle {
-      color: #444;
-      margin-bottom: 2rem;
+    /* ===== Masthead ===== */
+    header.masthead {
+      padding: 72px 0 48px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
     }
 
-    nav {
-      margin-bottom: 2.5rem;
+    .masthead-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 32px;
     }
 
-    nav a {
-      margin-right: 18px;
-      color: #111;
+    .name {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .name .dot {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-top: 14px;
+      max-width: 40ch;
+    }
+
+    .meta-strip {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .meta-strip strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ===== Nav ===== */
+    nav.primary {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      z-index: 10;
+    }
+
+    nav.primary a {
+      color: var(--ink);
       text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
+    nav.primary a:hover { color: var(--accent); border-color: var(--accent); }
 
+    /* ===== Section structure ===== */
     section {
-      margin-bottom: 2.5rem;
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--rule);
     }
 
-    h2 {
-      font-size: 1.2rem;
-      font-weight: normal;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 6px;
-      margin-bottom: 1rem;
+    section:last-of-type { border-bottom: none; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 48px;
+      margin-bottom: 36px;
     }
 
-    .project {
-      margin-bottom: 1.2rem;
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 8px;
     }
 
-    .footer {
-      color: #666;
+    .section-label .num {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      margin-right: 8px;
+    }
+
+    h2.section-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.9rem;
+      letter-spacing: -0.01em;
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    h2.section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ===== About ===== */
+    .about-body {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 48px;
+    }
+
+    .about-side {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .about-side dt {
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: 14px;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+    }
+
+    .about-side dt:first-child { margin-top: 0; }
+
+    .about-side dd {
+      margin: 4px 0 0;
+    }
+
+    .about-prose p {
+      margin: 0 0 1.1em;
+      font-size: 1.08rem;
+    }
+
+    .about-prose p:last-child { margin-bottom: 0; }
+
+    /* ===== Entry styling ===== */
+    .entry {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 48px;
+      padding: 28px 0;
+      border-top: 1px dotted var(--rule);
+    }
+
+    .entry:first-of-type { border-top: none; padding-top: 0; }
+
+    .entry-meta {
+      font-family: var(--sans);
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .entry-meta .status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    .entry-meta .status.live {
+      color: var(--accent);
+      border-color: var(--accent-soft);
+    }
+
+    .entry-meta .tag {
+      display: block;
+      margin-top: 6px;
+    }
+
+    .entry-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+
+    .entry-title a {
+      color: var(--ink);
+      text-decoration: none;
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      transition: background-size 0.3s, color 0.2s;
+      padding-bottom: 2px;
+    }
+
+    .entry-title a:hover {
+      color: var(--accent);
+      background-size: 100% 1px;
+    }
+
+    .entry-subtitle {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--muted);
+      font-size: 1rem;
+      margin: 0 0 14px;
+    }
+
+    .entry-body {
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    .entry-body p { margin: 0 0 0.8em; }
+    .entry-body p:last-child { margin-bottom: 0; }
+
+    .entry-body code {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: var(--paper-warm);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    .entry-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dotted var(--rule);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .entry-stats .stat-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .entry-stats .stat-val {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .entry-links {
+      margin-top: 14px;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+    }
+
+    .entry-links a {
+      color: var(--accent);
+      text-decoration: none;
+      margin-right: 18px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .entry-links a:hover { border-bottom-color: var(--accent); }
+
+    .entry-links a::before {
+      content: '→ ';
+      color: var(--muted);
+    }
+
+    /* ===== Compact entries for shorter projects ===== */
+    .compact-entry {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 48px;
+      padding: 18px 0;
+      border-top: 1px dotted var(--rule);
+    }
+
+    .compact-entry:first-of-type { border-top: none; padding-top: 0; }
+
+    .compact-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0 0 4px;
+    }
+
+    .compact-desc {
+      font-size: 0.98rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* ===== Notes ===== */
+    .notes-list .entry-body {
+      font-size: 1rem;
+    }
+
+    /* ===== Personal section ===== */
+    .personal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+    }
+
+    .personal-col h3 {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .personal-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    .personal-col li::before {
+      content: '·  ';
+      color: var(--accent);
+    }
+
+    .personal-col .note {
+      font-style: italic;
+      color: var(--muted);
       font-size: 0.95rem;
-      margin-top: 3rem;
+      margin-top: 6px;
     }
 
-    a {
-      color: #111;
+    /* ===== Contact ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 48px;
+    }
+
+    .contact-body {
+      font-size: 1.08rem;
+    }
+
+    .contact-body a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-soft);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact-body a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .contact-body .channel {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-block;
+      width: 90px;
+    }
+
+    .contact-line {
+      padding: 8px 0;
+      border-bottom: 1px dotted var(--rule);
+    }
+
+    .contact-line:last-child { border-bottom: none; }
+
+    /* ===== Footer ===== */
+    footer {
+      padding: 48px 0 64px;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-top: 1px solid var(--rule);
+    }
+
+    footer .colophon {
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 0.92rem;
+    }
+
+    /* ===== Page-load animation ===== */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .masthead, section, footer { animation: rise 0.7s ease-out both; }
+    section:nth-of-type(1) { animation-delay: 0.05s; }
+    section:nth-of-type(2) { animation-delay: 0.1s; }
+    section:nth-of-type(3) { animation-delay: 0.15s; }
+    section:nth-of-type(4) { animation-delay: 0.2s; }
+    section:nth-of-type(5) { animation-delay: 0.25s; }
+    section:nth-of-type(6) { animation-delay: 0.3s; }
+    section:nth-of-type(7) { animation-delay: 0.35s; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 760px) {
+      body { font-size: 17px; }
+      .wrap { padding: 0 22px; }
+      header.masthead { padding: 48px 0 32px; }
+      .masthead-grid { grid-template-columns: 1fr; }
+      .meta-strip { text-align: left; }
+      .section-head,
+      .about-body,
+      .entry,
+      .compact-entry,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .section-label, .about-side, .entry-meta {
+        padding: 0;
+      }
+      nav.primary {
+        gap: 18px;
+        font-size: 0.75rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>David Dávila</h1>
-    <div class="subtitle">
-      Finance and Applied Mathematics student at the University of New Mexico
-    </div>
+  <div class="wrap">
 
-    <nav>
+    <!-- ========= MASTHEAD ========= -->
+    <header class="masthead">
+      <div class="masthead-grid">
+        <div>
+          <h1 class="name">David Dávila<span class="dot">.</span></h1>
+          <p class="tagline">Notes and projects in quantitative finance, derivatives, factor investing, and applied mathematics.</p>
+        </div>
+        <div class="meta-strip">
+          <strong>Albuquerque, NM</strong><br/>
+          University of New Mexico<br/>
+          BS Applied Math · BBA Finance<br/>
+          Class of 2027
+        </div>
+      </div>
+    </header>
+
+    <nav class="primary">
       <a href="#about">About</a>
-      <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#r-studies">R Studies</a>
+      <a href="#competitions">Competitions</a>
       <a href="#notes">Notes</a>
+      <a href="#elsewhere">Elsewhere</a>
       <a href="#contact">Contact</a>
     </nav>
 
+    <!-- ========= ABOUT ========= -->
     <section id="about">
-      <h2>About</h2>
-      <p>
-        I am a Finance and Applied Mathematics student at the University of New Mexico.
-        My interests are in quantitative research, systematic investing, derivatives,
-        portfolio construction, and trading.
-      </p>
-      <p>
-        This site is a place to share selected projects, notes, and research as I continue
-        building toward a career in quantitative finance.
-      </p>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-
-      <div class="project">
-        <strong>Modern Portfolio Theory: Sharpe Ratio Maximization in Python</strong><br />
-        Portfolio optimization project using historical asset returns, covariance estimation,
-        and constrained optimization to study efficient portfolios.
+      <div class="section-head">
+        <div class="section-label"><span class="num">01</span>About</div>
+        <h2 class="section-title">A junior building toward <em>quantitative research</em>.</h2>
       </div>
-
-      <div class="project">
-        <strong>Long/Short Momentum Strategy</strong><br />
-        A rules-based equity strategy using momentum ranking, liquidity constraints,
-        and periodic rebalancing.
+      <div class="about-body">
+        <dl class="about-side">
+          <dt>Concentration</dt>
+          <dd>Quant trading, derivatives, systematic investing</dd>
+          <dt>Languages</dt>
+          <dd>Spanish (native), English (fluent), Mandarin (HSK 3)</dd>
+          <dt>CFA</dt>
+          <dd>Level I passed (Feb 2026)<br/>Level II — Aug 2026</dd>
+          <dt>Originally</dt>
+          <dd>Badajoz, Spain</dd>
+        </dl>
+        <div class="about-prose">
+          <p>I'm a junior at the University of New Mexico studying Applied Mathematics and Finance, with a long-term aim of working in quantitative trading and systematic investing. My work sits at the intersection of derivatives pricing, factor research, and the mathematical machinery that makes both of those serious: convergence theorems, stochastic calculus, numerical methods.</p>
+          <p>This site is where I keep that work. Papers, code, backtests, and shorter notes — drafts and finished pieces both, labeled honestly. If something is wrong I want to know.</p>
+          <p>Three people have shaped how I think about all of this. <strong>Lee Munson, CFA, CFP</strong> taught me how to read market behavior. <strong>Dr. Hsuan-Chi Chen</strong> taught me how to take research and finance theory seriously. <strong>Dr. Subramanian Iyer</strong> taught me how code and portfolio management actually work in practice. The debt is real and worth acknowledging.</p>
+          <p>Before this, I spent two seasons as an NCAA Division I golfer at UNM. The discipline transferred more than the swing did.</p>
+        </div>
       </div>
     </section>
 
+    <!-- ========= RESEARCH ========= -->
+    <section id="research">
+      <div class="section-head">
+        <div class="section-label"><span class="num">02</span>Research</div>
+        <h2 class="section-title">Working papers and ongoing <em>collaborations</em>.</h2>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status live">Active</span>
+          <span class="tag">Derivatives / numerical analysis</span>
+          <span class="tag">Solo · 2026</span>
+        </div>
+        <div>
+          <h3 class="entry-title"><a href="https://github.com/daviddavilad/option-pricing" target="_blank" rel="noopener">Binomial Option Pricing: Convergence, Oscillation, and Strike Alignment</a></h3>
+          <p class="entry-subtitle">CRR, Tian (1999), and Leisen–Reimer compared against Black–Scholes — both empirically and on paper.</p>
+          <div class="entry-body">
+            <p>A self-study research note on binomial option pricing. The math (CRR convergence via Lindeberg–Feller, the oscillation mechanism, strike-alignment in Tian 1999) is standard and not novel — but the note is mine, the implementations are mine, and the proofs are written from first principles. Empirical convergence rates fitted on log|ε_N|: CRR β = 1.000, Tian (1999) β = 1.005, Leisen–Reimer β = 1.995 — matching the theoretical predictions to three decimals.</p>
+            <p>The repository includes a ~35-page typeset mathematical note in LaTeX, a separate ~30-page document of handwritten derivations covering replication, Lindeberg–Feller verification, and the oscillation mechanism, and 127 tests — 28 of which reproduce numerical values from Tian (1999) Tables I and II to 4–6 decimal places. The mathematical work was reviewed by Prof. Jens Lorenz (UNM Math).</p>
+          </div>
+          <div class="entry-links">
+            <a href="https://github.com/daviddavilad/option-pricing" target="_blank" rel="noopener">Repository</a>
+            <a href="pdfs/binomial-option-pricing.pdf" target="_blank" rel="noopener">Typeset note</a>
+            <a href="pdfs/crr-handwritten-derivations.pdf" target="_blank" rel="noopener">Handwritten derivations</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">In progress</span>
+          <span class="tag">Option pricing</span>
+          <span class="tag">With Dr. Hsuan-Chi Chen</span>
+          <span class="tag">Faculty Aide · Fall 2026</span>
+        </div>
+        <div>
+          <h3 class="entry-title">Lattice Geometry, Strike-Location Error, and Parity-Free Smooth Convergence in Binomial Option Pricing</h3>
+          <p class="entry-subtitle">Co-authored extension of CRR targeting reduced convergence oscillation.</p>
+          <div class="entry-body">
+            <p>Ongoing collaboration with Dr. Hsuan-Chi Chen extending the standard CRR tree to a geometric-center construction (GCRR). The aim is publication; the current focus is empirically characterizing the oscillation reduction and isolating where the geometric-center construction actually buys you accuracy versus where it doesn't.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">Planned</span>
+          <span class="tag">Volatility modeling</span>
+          <span class="tag">Solo · Summer 2026</span>
+        </div>
+        <div>
+          <h3 class="entry-title">Rough Volatility Calibration (rBergomi)</h3>
+          <p class="entry-subtitle">Bayer–Friz–Gatheral rough Bergomi calibration on listed index options.</p>
+          <div class="entry-body">
+            <p>Implementation and calibration of the rough Bergomi model on SPX options, with attention to the Hurst parameter, hybrid simulation schemes, and calibration stability. Intended as my primary differentiating research artifact for MFE applications.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">Planned</span>
+          <span class="tag">Statistical arbitrage / risk modeling</span>
+          <span class="tag">Solo · Summer 2026</span>
+        </div>
+        <div>
+          <h3 class="entry-title">An Empirical Study of Covariance Matrix Denoising for Statistical Arbitrage</h3>
+          <p class="entry-subtitle">When does denoising actually help, and which estimator wins under which conditions?</p>
+          <div class="entry-body">
+            <p>The sample covariance matrix is the wrong input for any portfolio with more names than observations, but the literature is split on what to replace it with — Ledoit–Wolf linear shrinkage, nonlinear shrinkage, Marchenko–Pastur eigenvalue clipping, factor-model residuals, graphical lasso. The research question is when each estimator actually improves out-of-sample statistical-arbitrage performance, and what conditions (universe size, sample window, signal type) determine the answer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= STRATEGIES ========= -->
+    <section id="strategies">
+      <div class="section-head">
+        <div class="section-label"><span class="num">03</span>Strategies</div>
+        <h2 class="section-title">Backtested systems and <em>working code</em>.</h2>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status live">Active</span>
+          <span class="tag">Cross-sectional L/S equity</span>
+          <span class="tag">Python · cvxpy · WRDS</span>
+        </div>
+        <div>
+          <h3 class="entry-title"><a href="https://github.com/daviddavilad/axiom-fund" target="_blank" rel="noopener">Axiom Fund — Systematic Market-Neutral L/S Research Engine</a></h3>
+          <p class="entry-subtitle">A 4-signal composite backtested on the CRSP top-1000 universe.</p>
+          <div class="entry-body">
+            <p>Composite of gross profitability, idiosyncratic volatility, residual momentum, and post-earnings-announcement drift. Sector-, beta-, and dollar-neutral convex MVO (cvxpy) with Ledoit–Wolf shrunk covariance and Compustat-anchored point-in-time discipline. Costs modeled as commission, Corwin–Schultz half-spread, square-root impact (Almgren et al. 2005), and borrow.</p>
+            <p>Per-signal IC analysis over 116 monthly periods finds PEAD with the strongest t-statistic despite the smallest mean IC (t = 2.67, hit rate 63.8%), while residual momentum has effectively decayed (t = 0.26, p = 0.80) — consistent with the post-publication factor decay documented in McLean–Pontiff (2016). Regime decomposition shows the gross Sharpe is primarily delivered by bull-regime exposure, with IVol exhibiting the classic low-vol cyclicality (bull t = +3.83, bear t = −2.47).</p>
+            <div class="entry-stats">
+              <div><span class="stat-label">Gross Sharpe</span><span class="stat-val">0.78</span></div>
+              <div><span class="stat-label">Net Sharpe</span><span class="stat-val">0.18 – 0.48</span></div>
+              <div><span class="stat-label">Window</span><span class="stat-val">9.8 years</span></div>
+              <div><span class="stat-label">Strongest signal</span><span class="stat-val">PEAD, t = 2.67</span></div>
+            </div>
+          </div>
+          <div class="entry-links">
+            <a href="https://github.com/daviddavilad/axiom-fund" target="_blank" rel="noopener">Repository</a>
+            <a href="https://github.com/daviddavilad/axiom-fund/blob/main/docs/methodology_audit.md" target="_blank" rel="noopener">Methodology audit</a>
+            <a href="https://github.com/daviddavilad/axiom-fund/blob/main/docs/limitations.md" target="_blank" rel="noopener">Limitations</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status live">Active</span>
+          <span class="tag">Event-driven / single name</span>
+          <span class="tag">Python · yfinance</span>
+        </div>
+        <div>
+          <h3 class="entry-title"><a href="#" rel="noopener">BeatScore — Earnings Event Backtester</a></h3>
+          <p class="entry-subtitle">An 11-feature composite ranking pre-earnings setups, with cross-sectional bucketing and attribution.</p>
+          <div class="entry-body">
+            <p>For each earnings event, the system pulls a snapshot of eleven pre-announcement signals — momentum (20D, 60D), the four-quarter trailing surprise and beat rate, gross-margin trend, sector momentum, valuation (trailing P/E, P/S), implied-vol percentile, analyst-revision z-score, and short interest — and combines them into a standardized BeatScore. Cross-sections are pooled within a configurable window, terciled, and held over T+1, T+5, and T+20.</p>
+            <p>Feature importance is measured two ways: univariate correlations and a standardized linear regression on returns. Per-ticker attribution decomposes the High-minus-Low spread by name, which is where most of the interesting failure modes live.</p>
+          </div>
+          <div class="entry-links">
+            <a href="#">Repository</a>
+            <a href="#">Sample run</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">Active</span>
+          <span class="tag">Regime-switching / macro</span>
+          <span class="tag">Python · yfinance</span>
+        </div>
+        <div>
+          <h3 class="entry-title"><a href="#" rel="noopener">VIX Regime-Switching Strategy</a></h3>
+          <p class="entry-subtitle">A lagged-signal three-state allocation between defensive, aggressive, and cash.</p>
+          <div class="entry-body">
+            <p>Daily rebalance between a high-quality dividend ETF (RWL), a momentum ETF (SPMO), and cash, driven by the prior day's VIX level. The lagged signal is the point: it forces the strategy to be implementable in real time and removes the common look-ahead artifact that flatters regime-switch backtests. Drawdowns compared head-to-head against the S&amp;P 500 over 2010–2024.</p>
+          </div>
+          <div class="entry-links">
+            <a href="#">Repository</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">Active</span>
+          <span class="tag">Intraday event-driven</span>
+          <span class="tag">Python · 1-minute bars</span>
+        </div>
+        <div>
+          <h3 class="entry-title"><a href="#" rel="noopener">Volume-Spike Event Backtester</a></h3>
+          <p class="entry-subtitle">Minute-bar volume z-score signals with realistic execution assumptions.</p>
+          <div class="entry-body">
+            <p>An event-driven framework on 1-minute bars. The signal is a rolling volume z-score over a configurable lookback; entries are taken on the <em>next</em> minute's open and exited at the same minute's close, with slippage applied to both sides. The framework sweeps multiple sigma thresholds and reports trade-level statistics — win rate, mean and median per-trade return, equity curve, signal-time markers on the volume series — so the question of whether the edge is real, or just survives at one threshold, is answerable rather than asserted.</p>
+            <p>The motivation is companion work for a queue-reactive LOB simulator I'm building in C++ over the summer; this is the higher-level event layer.</p>
+          </div>
+          <div class="entry-links">
+            <a href="#">Repository</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">Research</span>
+          <span class="tag">Factor / equity</span>
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="entry-title">Factor &amp; Style Research</h3>
+          <p class="entry-subtitle">Cross-sectional studies on momentum, value, and style-neutral construction.</p>
+          <div class="entry-body">
+            <p>A working notebook of factor-construction experiments: 12-1 and 6-1 price momentum, book-to-price and P/E sorts, sector-rotation rules, and style-neutralization. Less about the headline numbers than about which factors still earn their name once you treat them honestly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= R STUDIES ========= -->
+    <section id="r-studies">
+      <div class="section-head">
+        <div class="section-label"><span class="num">04</span>R Studies</div>
+        <h2 class="section-title">Shorter empirical work in <em>R</em>.</h2>
+      </div>
+
+      <div class="entry-body" style="margin-bottom: 28px; max-width: 60ch; margin-left: 228px;">
+        <p>Working studies from coursework and self-directed research. Each is small enough to live in a single script, large enough to ask a real question. Grouped roughly by what they study.</p>
+      </div>
+
+      <h3 style="font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 20px 0 14px 228px;">Fixed Income</h3>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Bullet, Barbell, and Ladder Portfolios</h3>
+          <p class="compact-desc">Construction and comparison of the three standard maturity structures under parallel and non-parallel yield-curve shifts, with duration and convexity attribution.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Cashflow Matching and Immunization</h3>
+          <p class="compact-desc">Liability-driven construction via cashflow matching and Redington immunization (duration- and convexity-matched), with sensitivity to curve shifts.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Key-Rate Duration</h3>
+          <p class="compact-desc">Decomposition of portfolio interest-rate exposure across key points on the yield curve. The right tool when parallel-shift duration starts hiding more than it shows.</p>
+        </div>
+      </div>
+
+      <h3 style="font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 36px 0 14px 228px;">Portfolio &amp; Risk</h3>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Black–Litterman with Implied Views</h3>
+          <p class="compact-desc">Reverse-optimized market-implied views as the starting prior, then investor views layered with calibrated confidence. The right framework when the historical mean is a bad input.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">James–Stein Shrinkage for Expected Returns</h3>
+          <p class="compact-desc">Applied James–Stein estimation to the sample mean returns plug-in, with out-of-sample comparison against the naive estimator.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">PCA on the US Equity Cross-Section</h3>
+          <p class="compact-desc">Principal component analysis of equity returns to extract statistical factors and study how much of the cross-section the first few components actually explain.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Stress Testing and Crisis Correlations</h3>
+          <p class="compact-desc">Scenario-based stress tests alongside rolling-window correlations through documented stress episodes. Where diversification fails, and why "low correlation in normal times" is the wrong reassurance.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Brinson Performance Attribution</h3>
+          <p class="compact-desc">Brinson–Hood–Beebower decomposition (allocation, selection, interaction) across sectors for a managed portfolio versus benchmark.</p>
+        </div>
+      </div>
+
+      <div class="compact-entry">
+        <div class="entry-meta">
+          <span class="tag">R</span>
+        </div>
+        <div>
+          <h3 class="compact-title">Private Equity Alpha Erosion</h3>
+          <p class="compact-desc">An empirical look at whether the historical PE return premium has compressed as the asset class has scaled. Vintage-year comparisons, public-market-equivalents, and what the data actually says.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= COMPETITIONS ========= -->
+    <section id="competitions">
+      <div class="section-head">
+        <div class="section-label"><span class="num">05</span>Competitions</div>
+        <h2 class="section-title">Things I tried to <em>win</em>.</h2>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status live">1st place</span>
+          <span class="tag">CQA Investment Challenge</span>
+          <span class="tag">Global · Oct 2025 – Apr 2026</span>
+        </div>
+        <div>
+          <h3 class="entry-title">CQA Investment Challenge — National Winner</h3>
+          <p class="entry-subtitle">Market-neutral L/S equity, 12-1 cross-sectional momentum.</p>
+          <div class="entry-body">
+            <p>Co-built with Samuel Landis and mentored by Dr. Subramanian Iyer. ~166% gross exposure, monthly rebalance via the Axioma US51 risk model, strict neutrality and position-limit constraints. Zero compliance violations. Ranked first across returns, risk management, and final presentation.</p>
+            <p>A separate repository with the strategy code and a written analysis of the regimes where this approach <em>wouldn't</em> have worked is in progress.</p>
+            <div class="entry-stats">
+              <div><span class="stat-label">Return</span><span class="stat-val">~29% over 6 mo.</span></div>
+              <div><span class="stat-label">Style</span><span class="stat-val">Cross-sectional momentum</span></div>
+              <div><span class="stat-label">Constraint</span><span class="stat-val">Market-neutral, position-limited</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="status">Top 1.1%</span>
+          <span class="tag">CME Group Trading Challenge</span>
+          <span class="tag">Apr 2026</span>
+        </div>
+        <div>
+          <h3 class="entry-title">CME Group Trading Challenge — 30th of 2,789</h3>
+          <p class="entry-subtitle">Thesis-driven discretionary futures trading.</p>
+          <div class="entry-body">
+            <p>Discretionary trading across rates, equity-index, and commodity futures. 12 trades total, each tied to an explicit macro thesis with disciplined position sizing — a deliberate contrast to the systematic work elsewhere on this site.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= NOTES ========= -->
     <section id="notes">
-      <h2>Notes</h2>
-      <p>
-        Coming soon: short notes on systematic investing, portfolio construction,
-        derivatives, and mathematical finance.
-      </p>
+      <div class="section-head">
+        <div class="section-label"><span class="num">06</span>Notes</div>
+        <h2 class="section-title">Shorter writing &amp; <em>working notes</em>.</h2>
+      </div>
+
+      <div class="notes-list">
+        <div class="entry">
+          <div class="entry-meta">
+            <span class="tag">Drafting</span>
+            <span class="tag">Derivatives</span>
+          </div>
+          <div>
+            <h3 class="entry-title">Why the CRR tree oscillates — and what to do about it</h3>
+            <div class="entry-body">
+              <p>An informal companion to the longer paper. The oscillation isn't a bug; it's geometry. Notes on why averaging across even/odd N is a quick fix and where it stops working.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <span class="tag">Drafting</span>
+            <span class="tag">Factor investing</span>
+          </div>
+          <div>
+            <h3 class="entry-title">What I actually learned building Axiom Fund</h3>
+            <div class="entry-body">
+              <p>The published Sharpe is the boring part. Notes on what point-in-time discipline costs you in practice, the gap between gross and net once you take borrow and impact seriously, and which signal genuinely earned its place.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <span class="tag">Planned</span>
+            <span class="tag">Event-driven</span>
+          </div>
+          <div>
+            <h3 class="entry-title">Eleven signals into one: building BeatScore</h3>
+            <div class="entry-body">
+              <p>Notes on the design choices behind the earnings backtester — why I rank inside a tight pooling window rather than across the year, where the linear regression and the correlation table disagree, and which features I would drop if I had to start over.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <span class="tag">Planned</span>
+            <span class="tag">Market microstructure</span>
+          </div>
+          <div>
+            <h3 class="entry-title">Notes from a queue-reactive LOB simulator (in C++)</h3>
+            <div class="entry-body">
+              <p>Summer 2026 project: building a matching engine and replaying real L2 data, with one focused result — fill probability conditioned on queue position, or the market-vs-limit crossover under realistic latency. Reference points: Huang–Lehalle–Rosenbaum (2015) and Cont–Stoikov–Talreja (2010). Notes will go up as the implementation lands.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- ========= ELSEWHERE ========= -->
+    <section id="elsewhere">
+      <div class="section-head">
+        <div class="section-label"><span class="num">07</span>Elsewhere</div>
+        <h2 class="section-title">Outside the <em>terminal</em>.</h2>
+      </div>
+
+      <div class="personal-grid">
+        <div class="personal-col">
+          <h3>Reading — 2026</h3>
+          <ul>
+            <li>Shreve, <em>Stochastic Calculus for Finance II</em></li>
+            <li>Gatheral, <em>The Volatility Surface</em></li>
+            <li>Bouchaud &amp; Bonart, <em>Trades, Quotes &amp; Prices</em></li>
+            <li>Graham, <em>The Intelligent Investor</em> (re-read)</li>
+            <li>Taleb, <em>Dynamic Hedging</em></li>
+          </ul>
+          <p class="note">Updated as I finish things, not as I buy them.</p>
+        </div>
+
+        <div class="personal-col">
+          <h3>Papers I keep going back to</h3>
+          <ul>
+            <li>Bühler, Gonon, Teichmann, Wood — <em>Deep Hedging</em></li>
+            <li>Joshi — <em>Achieving Smooth Asymptotics for European Option Prices in Binomial Trees</em></li>
+            <li>Chung &amp; Shih — <em>Generalized Cox–Ross–Rubinstein Binomial Models</em></li>
+            <li>Widdicks, Andricopoulos, Newton &amp; Duck — <em>On the Enhanced Convergence of Standard Lattice Methods for Option Pricing</em></li>
+          </ul>
+        </div>
+
+        <div class="personal-col">
+          <h3>Off the desk</h3>
+          <ul>
+            <li>Competitive golf (+4.5)</li>
+            <li>Poker</li>
+            <li>Pickleball</li>
+            <li>Distance running</li>
+            <li>Snowboarding</li>
+            <li>Making cocktails</li>
+          </ul>
+          <p class="note">Two seasons of D-I golf left a residue. Mostly good.</p>
+        </div>
+
+        <div class="personal-col">
+          <h3>Food, honestly</h3>
+          <ul>
+            <li><em>Gazpacho</em> — non-negotiable</li>
+            <li>Spanish food generally</li>
+            <li>Bagels with cream cheese (American convert)</li>
+          </ul>
+          <p class="note">Best bagel I've had in the US: PopUp Bagels, La Jolla.</p>
+        </div>
+
+        <div class="personal-col">
+          <h3>From Badajoz</h3>
+          <ul>
+            <li>Spanish, first and best</li>
+            <li>Albuquerque since 2023</li>
+            <li>California, always</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= CONTACT ========= -->
     <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        LinkedIn: <a href="https://www.linkedin.com/in/daviddavilacorraliza/" target="_blank" rel="noopener noreferrer">David's LinkedIn</a><br />
-        GitHub: <a href="https://github.com/daviddavilad" target="_blank" rel="noopener noreferrer">David's GitHub</a><br />
-        Email: ddavila2005@unm.edu
-      </p>
+      <div class="section-head">
+        <div class="section-label"><span class="num">08</span>Contact</div>
+        <h2 class="section-title">Get in <em>touch</em>.</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div></div>
+        <div class="contact-body">
+          <div class="contact-line">
+            <span class="channel">Email</span>
+            <a href="mailto:ddavila2005@unm.edu">ddavila2005@unm.edu</a>
+          </div>
+          <div class="contact-line">
+            <span class="channel">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/daviddavilacorraliza/" target="_blank" rel="noopener">linkedin.com/in/daviddavilacorraliza</a>
+          </div>
+          <div class="contact-line">
+            <span class="channel">GitHub</span>
+            <a href="https://github.com/daviddavilad" target="_blank" rel="noopener">github.com/daviddavilad</a>
+          </div>
+          <div class="contact-line">
+            <span class="channel">CV</span>
+            <a href="cv.pdf" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <div class="footer">
-      Last updated April 2026.
-    </div>
+    <footer>
+      <div class="colophon">Set in EB Garamond &amp; Inter.</div>
+      <div>Last updated May 2026 · Albuquerque, NM</div>
+    </footer>
+
   </div>
 </body>
 </html>
