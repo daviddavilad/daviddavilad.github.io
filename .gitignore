@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python (for future)
+__pycache__/
+*.pyc
+.env
+
+# Logs
+*.log
