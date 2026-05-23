@@ -352,6 +352,12 @@
       color: var(--muted);
     }
 
+    .entry-links .pending {
+      color: var(--muted);
+      font-style: italic;
+      margin-right: 18px;
+    }
+
     /* ===== Compact entries for shorter projects ===== */
     .compact-entry {
       display: grid;
@@ -368,6 +374,22 @@
       font-size: 1.1rem;
       font-weight: 500;
       margin: 0 0 4px;
+    }
+
+    .compact-title a {
+      color: var(--ink);
+      text-decoration: none;
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      transition: background-size 0.3s, color 0.2s;
+      padding-bottom: 2px;
+    }
+
+    .compact-title a:hover {
+      color: var(--accent);
+      background-size: 100% 1px;
     }
 
     .compact-desc {
@@ -687,20 +709,19 @@
 
       <div class="entry">
         <div class="entry-meta">
-          <span class="status live">Active</span>
-          <span class="tag">Event-driven / single name</span>
-          <span class="tag">Python · yfinance</span>
+          <span class="status">In progress</span>
+          <span class="tag">Cross-sectional / factor research</span>
+          <span class="tag">Python · CRSP · Compustat · WRDS</span>
         </div>
         <div>
-          <h3 class="entry-title"><a href="#" rel="noopener">BeatScore — Earnings Event Backtester</a></h3>
-          <p class="entry-subtitle">An 11-feature composite ranking pre-earnings setups, with cross-sectional bucketing and attribution.</p>
+          <h3 class="entry-title"><a href="https://github.com/daviddavilad/earnings-drift" target="_blank" rel="noopener">Earnings Drift on a Russell-Like US Universe</a></h3>
+          <p class="entry-subtitle">Replication and extension of the PEAD literature, 2010–2024.</p>
           <div class="entry-body">
-            <p>For each earnings event, the system pulls a snapshot of eleven pre-announcement signals — momentum (20D, 60D), the four-quarter trailing surprise and beat rate, gross-margin trend, sector momentum, valuation (trailing P/E, P/S), implied-vol percentile, analyst-revision z-score, and short interest — and combines them into a standardized BeatScore. Cross-sections are pooled within a configurable window, terciled, and held over T+1, T+5, and T+20.</p>
-            <p>Feature importance is measured two ways: univariate correlations and a standardized linear regression on returns. Per-ticker attribution decomposes the High-minus-Low spread by name, which is where most of the interesting failure modes live.</p>
+            <p>A three-signal composite of Standardized Unexpected Earnings (Foster–Olsen–Shevlin 1984), price momentum 12-2 (Jegadeesh–Titman 1993), and balance-sheet accruals (Sloan 1996), tested on a Russell-like universe of the top 3,000 US common stocks ranked annually by market cap. Financials excluded, sub-$5 names dropped at formation. Decile-sorted long-short portfolios held monthly, evaluated with Newey-West-adjusted t-statistics, Fama–French 3- and 5-factor alphas, and a transaction-cost ladder (0, 10, 25, 50 bps round-trip).</p>
+            <p>The repository is structured as a proper Python package — typed config, parquet-cached WRDS pulls, modular signal computation, and pytest-tested foundations — rather than a flat notebook. UNM's WRDS subscription does not include the CCM linktable, so the project builds a CUSIP-based link between Compustat and CRSP from first principles. Universe construction is implemented; signals, portfolio formation, and evaluation modules are next.</p>
           </div>
           <div class="entry-links">
-            <a href="#">Repository</a>
-            <a href="#">Sample run</a>
+            <a href="https://github.com/daviddavilad/earnings-drift" target="_blank" rel="noopener">Repository</a>
           </div>
         </div>
       </div>
@@ -776,7 +797,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Bullet, Barbell, and Ladder Portfolios</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/fixed-income/bullet-barbell-ladder.R" target="_blank" rel="noopener">Bullet, Barbell, and Ladder Portfolios</a></h3>
           <p class="compact-desc">Construction and comparison of the three standard maturity structures under parallel and non-parallel yield-curve shifts, with duration and convexity attribution.</p>
         </div>
       </div>
@@ -786,7 +807,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Cashflow Matching and Immunization</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/fixed-income/cashflow-immunization.R" target="_blank" rel="noopener">Cashflow Matching and Immunization</a></h3>
           <p class="compact-desc">Liability-driven construction via cashflow matching and Redington immunization (duration- and convexity-matched), with sensitivity to curve shifts.</p>
         </div>
       </div>
@@ -796,7 +817,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Key-Rate Duration</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/fixed-income/key-rate-duration.R" target="_blank" rel="noopener">Key-Rate Duration</a></h3>
           <p class="compact-desc">Decomposition of portfolio interest-rate exposure across key points on the yield curve. The right tool when parallel-shift duration starts hiding more than it shows.</p>
         </div>
       </div>
@@ -808,7 +829,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Black–Litterman with Implied Views</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/portfolio-risk/black-litterman-implied-views.R" target="_blank" rel="noopener">Black–Litterman with Implied Views</a></h3>
           <p class="compact-desc">Reverse-optimized market-implied views as the starting prior, then investor views layered with calibrated confidence. The right framework when the historical mean is a bad input.</p>
         </div>
       </div>
@@ -818,7 +839,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">James–Stein Shrinkage for Expected Returns</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/portfolio-risk/james-stein-shrinkage.R" target="_blank" rel="noopener">James–Stein Shrinkage for Expected Returns</a></h3>
           <p class="compact-desc">Applied James–Stein estimation to the sample mean returns plug-in, with out-of-sample comparison against the naive estimator.</p>
         </div>
       </div>
@@ -828,7 +849,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">PCA on the US Equity Cross-Section</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/portfolio-risk/pca-equity-cross-section.R" target="_blank" rel="noopener">PCA on the US Equity Cross-Section</a></h3>
           <p class="compact-desc">Principal component analysis of equity returns to extract statistical factors and study how much of the cross-section the first few components actually explain.</p>
         </div>
       </div>
@@ -838,7 +859,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Stress Testing and Crisis Correlations</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/portfolio-risk/stress-testing-crisis-correlations.R" target="_blank" rel="noopener">Stress Testing and Crisis Correlations</a></h3>
           <p class="compact-desc">Scenario-based stress tests alongside rolling-window correlations through documented stress episodes. Where diversification fails, and why "low correlation in normal times" is the wrong reassurance.</p>
         </div>
       </div>
@@ -848,7 +869,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Brinson Performance Attribution</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/portfolio-risk/brinson-attribution.R" target="_blank" rel="noopener">Brinson Performance Attribution</a></h3>
           <p class="compact-desc">Brinson–Hood–Beebower decomposition (allocation, selection, interaction) across sectors for a managed portfolio versus benchmark.</p>
         </div>
       </div>
@@ -858,7 +879,7 @@
           <span class="tag">R</span>
         </div>
         <div>
-          <h3 class="compact-title">Private Equity Alpha Erosion</h3>
+          <h3 class="compact-title"><a href="https://github.com/daviddavilad/quant-r-studies/blob/main/portfolio-risk/pe-alpha-erosion.R" target="_blank" rel="noopener">Private Equity Alpha Erosion</a></h3>
           <p class="compact-desc">An empirical look at whether the historical PE return premium has compressed as the asset class has scaled. Vintage-year comparisons, public-market-equivalents, and what the data actually says.</p>
         </div>
       </div>
@@ -945,12 +966,12 @@
         <div class="entry">
           <div class="entry-meta">
             <span class="tag">Planned</span>
-            <span class="tag">Event-driven</span>
+            <span class="tag">Factor research</span>
           </div>
           <div>
-            <h3 class="entry-title">Eleven signals into one: building BeatScore</h3>
+            <h3 class="entry-title">Three signals, one composite: design choices in Earnings Drift</h3>
             <div class="entry-body">
-              <p>Notes on the design choices behind the earnings backtester — why I rank inside a tight pooling window rather than across the year, where the linear regression and the correlation table disagree, and which features I would drop if I had to start over.</p>
+              <p>Notes on the methodology behind the Earnings Drift project — why SUE, momentum, and accruals belong together, what equal-weighting the ranks gives you that an estimated-weights composite doesn't, and the regimes in which each individual signal carries the others. Also: building a CUSIP-based Compustat-CRSP link without CCM.</p>
             </div>
           </div>
         </div>
@@ -987,7 +1008,6 @@
             <li>Graham, <em>The Intelligent Investor</em> (re-read)</li>
             <li>Taleb, <em>Dynamic Hedging</em></li>
           </ul>
-          <p class="note">Updated as I finish things, not as I buy them.</p>
         </div>
 
         <div class="personal-col">
